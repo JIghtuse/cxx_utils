@@ -1,3 +1,4 @@
+#include <cassert>
 #include <fstream>
 #include <iostream>
 #include <random>
@@ -20,6 +21,8 @@ vector<string> read_file(const string& path)
 // Returns random line from a vector of lines
 string get_random_line(const vector<string>& lines)
 {
+    assert(!lines.empty());
+
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> dist (0, lines.size() - 1);
@@ -35,6 +38,13 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    const auto& lines = read_file(argv[1]);
+    const string& fname = argv[1];
+
+    const auto& lines = read_file(fname);
+    if (lines.empty()) {
+        cerr << "File '" << fname << "' is empty or unavailable\n";
+        return 1;
+    }
+
     cout << get_random_line(lines) << endl;
 }
