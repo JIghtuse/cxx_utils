@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <wc.h>
 
@@ -8,11 +9,12 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     if (argc == 1) {
-        print_counts(std::cin, std::cout);
+        print_counts(cin, cout);
     } else {
-        for (int i = 0; i < argc; ++i) {
-            print_counts(std::cin, std::cout);
-            std::cout << " " << argv[i] << std::endl;
+        for (int i = 1; i < argc; ++i) {
+            ifstream ifs{argv[i]};
+            print_counts(ifs, cout);
+            cout << " " << argv[i] << endl;
         }
     }
 
