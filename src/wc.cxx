@@ -5,6 +5,11 @@
 
 using namespace std;
 
-// void print_counts(const istream& in, ostream& out)
-void print_counts(const istream&, ostream&)
-{}
+void print_counts(const istream&, ostream& out)
+{
+    size_t nlines{0};
+    size_t nwords{0};
+    size_t nbytes{0};
+
+    out << nlines << " " << nwords << " " << nbytes;
+}
