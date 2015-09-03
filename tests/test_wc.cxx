@@ -6,9 +6,10 @@
 using namespace std;
 
 TEST(WcTest, EmptyPrintsZeros) {
+    istringstream iss;
     ostringstream oss;
 
-    print_counts(istringstream{}, oss);
+    print_counts(iss, oss);
 
     istringstream actual(oss.str());
     size_t nlines;
