@@ -1,21 +1,16 @@
 #include <wc.h>
 #include <string>
 #include <sstream>
+#include <tuple>
 #include <gtest/gtest.h>
 
 using namespace std;
 
 TEST(WcTest, EmptyPrintsZeros) {
     istringstream iss;
-    ostringstream oss;
 
-    print_counts(iss, oss);
-
-    istringstream actual(oss.str());
-    size_t nlines;
-    size_t nwords;
-    size_t nbytes;
-    actual >> nlines >> nwords >> nbytes;
+    size_t nlines, nwords, nbytes;
+    tie(nlines, nwords, nbytes) = get_counts(iss);
 
     EXPECT_EQ(0, nlines);
     EXPECT_EQ(0, nwords);
@@ -24,15 +19,9 @@ TEST(WcTest, EmptyPrintsZeros) {
 
 TEST(WcTest, OnelineOk) {
     istringstream iss{"a\n"};
-    ostringstream oss;
-
-    print_counts(iss, oss);
-
-    istringstream actual(oss.str());
-    size_t nlines;
-    size_t nwords;
-    size_t nbytes;
-    actual >> nlines >> nwords >> nbytes;
+    
+    size_t nlines, nwords, nbytes;
+    tie(nlines, nwords, nbytes) = get_counts(iss);
 
     EXPECT_EQ(1, nlines);
     EXPECT_EQ(1, nwords);
@@ -41,15 +30,9 @@ TEST(WcTest, OnelineOk) {
 
 TEST(WcTest, MulipleLinesOk) {
     istringstream iss{"cat\n  dog\n"};
-    ostringstream oss;
 
-    print_counts(iss, oss);
-
-    istringstream actual(oss.str());
-    size_t nlines;
-    size_t nwords;
-    size_t nbytes;
-    actual >> nlines >> nwords >> nbytes;
+    size_t nlines, nwords, nbytes;
+    tie(nlines, nwords, nbytes) = get_counts(iss);
 
     EXPECT_EQ(2, nlines);
     EXPECT_EQ(2, nwords);
