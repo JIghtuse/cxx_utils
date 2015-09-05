@@ -38,3 +38,14 @@ TEST(WcTest, MulipleLinesOk) {
     EXPECT_EQ(2, nwords);
     EXPECT_EQ(10, nbytes);
 }
+
+TEST(WcTest, WithoutNewline) {
+    istringstream iss{"a"};
+
+    size_t nlines, nwords, nbytes;
+    tie(nlines, nwords, nbytes) = get_counts(iss);
+
+    EXPECT_EQ(0, nlines);
+    EXPECT_EQ(1, nwords);
+    EXPECT_EQ(1, nbytes);
+}

@@ -1,8 +1,7 @@
 #include <wc.h>
 
+#include <cctype>
 #include <iostream>
-#include <sstream>
-#include <string>
 #include <tuple>
 #include <vector>
 
@@ -14,15 +13,25 @@ tuple<size_t, size_t, size_t> get_counts(std::istream& in)
     size_t nwords{0};
     size_t nbytes{0};
 
-    for (string s; getline(in, s);) {
-        ++nlines;
+    bool inside_word{false};
+    char c;
 
-        istringstream iss(s);
-        for (string word; iss >> word;)
-            ++nwords;
+    while (in.read(&c, 1)) {
+        ++nbytes;
 
-        nbytes += s.size() + 1; // all characters + newline
+        if (c == '\n')
+            ++nlines;
+
+        if (isspace(c)) {
+            if (inside_word)
+                ++nwords;
+            inside_word = false;
+        } else {
+            inside_word = true;
+        }
     }
+    if (inside_word)
+        ++nwords;
     return make_tuple(nlines, nwords, nbytes);
 }
 
