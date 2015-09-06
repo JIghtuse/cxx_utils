@@ -25,9 +25,9 @@ int main(int argc, char *argv[])
             nwords.push_back(nw);
             nbytes.push_back(nb);
         }
-        auto nl_total{accumulate(nlines.begin(), nlines.end(), 0)};
-        auto nw_total{accumulate(nwords.begin(), nwords.end(), 0)};
-        auto nb_total{accumulate(nbytes.begin(), nbytes.end(), 0)};
+        auto nl_total = accumulate(nlines.begin(), nlines.end(), 0);
+        auto nw_total = accumulate(nwords.begin(), nwords.end(), 0);
+        auto nb_total = accumulate(nbytes.begin(), nbytes.end(), 0);
 
         size_t nl_width = 1 + round(0.5 + log10(nl_total));
         size_t nw_width = 1 + round(0.5 + log10(nw_total));
