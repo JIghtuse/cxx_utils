@@ -24,3 +24,6 @@ add_executable(test_wc
     tests/test_wc.cxx)
 
 target_link_libraries(test_wc pthread gtest gtest_main)
+
+add_executable(bulls_and_cows
+    src/bulls_and_cows.cxx)
