@@ -9,7 +9,8 @@ using namespace std;
 namespace fs = boost::filesystem;
 
 enum class Extension {
-    CXX
+    C,
+    CXX,
 };
 
 using ExtensionDict = std::map<Extension, string>;
@@ -37,8 +38,10 @@ void grep_recursively(ExtensionDict& extensions, Extension ext, const char* patt
 /* grep-like tool to search in specific files */
 int main()
 {
-    ExtensionDict extensions;
-    extensions[Extension::CXX] = ".cxx";
+    ExtensionDict extensions{
+        {Extension::C, ".c"},
+        {Extension::CXX, ".cxx"},
+    };
 
     grep_recursively(extensions, Extension::CXX, "string");
 
