@@ -27,3 +27,13 @@ target_link_libraries(test_wc pthread gtest gtest_main)
 
 add_executable(bulls_and_cows
     src/bulls_and_cows.cxx)
+
+find_package(Boost COMPONENTS system filesystem REQUIRED)
+
+add_executable(lurker
+    src/lurker.cxx)
+
+target_link_libraries(lurker
+    ${Boost_SYSTEM_LIBRARIES}
+    ${Boost_FILESYSTEM_LIBRARIES}
+)
