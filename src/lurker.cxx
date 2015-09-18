@@ -36,14 +36,19 @@ void grep_recursively(ExtensionDict& extensions, Extension ext, const char* patt
 }
 
 /* grep-like tool to search in specific files */
-int main()
+int main(int argc, char *argv[])
 {
+    if (argc < 2) {
+        cerr << "Usage: " << argv[0] << " pattern\n";
+        return 1;
+    }
+
     ExtensionDict extensions{
         {Extension::C, ".c"},
         {Extension::CXX, ".cxx"},
     };
 
-    grep_recursively(extensions, Extension::CXX, "string");
+    grep_recursively(extensions, Extension::CXX, argv[1]);
 
     return 0;
 }
