@@ -15,5 +15,5 @@ pattern. For now accepts only string and doesn't print anything except matched
 lines:
 
     $ ./lurker random_device
-    random_device rd;
-    random_device rd;
+    10:     random_device rd;
+    26:     random_device rd;
