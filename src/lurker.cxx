@@ -17,10 +17,13 @@ using ExtensionDict = std::map<Extension, string>;
 
 void grep_in_file(const char* filename, const char* pattern)
 {
+    size_t lineno{0};
     ifstream ifs(filename);
-    for (string s; getline(ifs, s);)
+    for (string s; getline(ifs, s);) {
+        ++lineno;
         if (s.find(pattern) != string::npos)
-            cout << s << endl;
+            cout << lineno << ": " << s << endl;
+    }
 }
 
 void grep_recursively(ExtensionDict& extensions, Extension ext, const char* pattern)
