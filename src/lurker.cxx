@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <vector>
 
 using namespace std;
 namespace fs = boost::filesystem;
@@ -15,15 +16,30 @@ enum class Extension {
 
 using ExtensionDict = std::map<Extension, string>;
 
-void grep_in_file(const char* filename, const char* pattern)
+struct Match {
+    size_t lineno;
+    string s;
+};
+
+vector<Match> grep_in_file(const char* filename, const char* pattern)
 {
+    vector<Match> matches;
+
     size_t lineno{0};
     ifstream ifs(filename);
     for (string s; getline(ifs, s);) {
         ++lineno;
         if (s.find(pattern) != string::npos)
-            cout << lineno << ": " << s << endl;
+            matches.push_back(Match{lineno, s});
     }
+    return matches;
+}
+
+void print_matches(const char* filename, const vector<Match>& matches)
+{
+    cout << filename << endl;
+    for (const Match& match : matches)
+        cout << match.lineno << ":" << match.s << endl;
 }
 
 void grep_recursively(ExtensionDict& extensions, Extension ext, const char* pattern)
@@ -33,8 +49,11 @@ void grep_recursively(ExtensionDict& extensions, Extension ext, const char* patt
 
     for (auto element : fs::recursive_directory_iterator(search_path)) {
         fs::path p = element;
-        if (is_regular_file(p) && p.extension() == search_extension)
-            grep_in_file(p.c_str(), pattern);
+        if (is_regular_file(p) && p.extension() == search_extension) {
+            auto matches = grep_in_file(p.c_str(), pattern);
+            if (!matches.empty())
+                print_matches(p.c_str(), matches);
+        }
     }
 }
 
