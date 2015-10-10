@@ -42,8 +42,12 @@ void print_matches(const char* filename, const vector<Match>& matches)
         cout << match.lineno << ":" << match.s << endl;
 }
 
-void grep_recursively(ExtensionDict& extensions, Extension ext, const char* pattern)
+/* Looks for @pattern in current directory and subdirectories files
+ * Returns 0 if there were some matches, 1 otherwise */
+int grep_recursively(ExtensionDict& extensions, Extension ext, const char* pattern)
 {
+    bool was_matches{false};
+
     const string search_extension{extensions[ext]};
     fs::path search_path(".");
 
@@ -51,10 +55,13 @@ void grep_recursively(ExtensionDict& extensions, Extension ext, const char* patt
         fs::path p = element;
         if (is_regular_file(p) && p.extension() == search_extension) {
             auto matches = grep_in_file(p.c_str(), pattern);
-            if (!matches.empty())
+            if (!matches.empty()) {
+                was_matches = true;
                 print_matches(p.c_str(), matches);
+            }
         }
     }
+    return !was_matches;
 }
 
 /* grep-like tool to search in specific files */
@@ -70,7 +77,5 @@ int main(int argc, char *argv[])
         {Extension::CXX, ".cxx"},
     };
 
-    grep_recursively(extensions, Extension::CXX, argv[1]);
-
-    return 0;
+    return grep_recursively(extensions, Extension::CXX, argv[1]);
 }
