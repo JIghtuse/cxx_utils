@@ -37,3 +37,9 @@ target_link_libraries(lurker
     ${Boost_SYSTEM_LIBRARIES}
     ${Boost_FILESYSTEM_LIBRARIES}
 )
+
+add_executable(xml_value
+    src/xml_value.cxx)
+
+target_link_libraries(xml_value
+    tinyxml)
