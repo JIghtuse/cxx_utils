@@ -7,13 +7,27 @@ using namespace std;
 namespace fs = boost::filesystem;
 namespace po = boost::program_options;
 
+void print_parts(const po::variables_map& vm)
+{
+    if (vm.count("extension")) {
+        auto path = fs::path(vm["extension"].as<string>());
+        cout << path.extension() << endl;
+    }
+
+    if (vm.count("filename")) {
+        auto path = fs::path(vm["filename"].as<string>());
+        cout << path.filename() << endl;
+    }
+}
+
 /* path_parts: extract common parts from path */
 int main(int argc, char *argv[])
 {
     po::options_description desc("Allowed options");
     desc.add_options()
         ("help", "produce help message")
-        ("ext", po::value<string>(), "print extension")
+        ("extension", po::value<string>(), "print extension")
+        ("filename", po::value<string>(), "print filename")
     ;
 
     po::variables_map vm;
@@ -29,10 +43,6 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    if (vm.count("ext")) {
-        auto path = fs::path(vm["ext"].as<string>());
-        cout << path.extension() << endl;
-    }
-
+    print_parts(vm);
     return 0;
 }
