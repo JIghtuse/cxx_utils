@@ -28,7 +28,7 @@ target_link_libraries(test_wc pthread gtest gtest_main)
 add_executable(bulls_and_cows
     src/bulls_and_cows.cxx)
 
-find_package(Boost 1.58 COMPONENTS system filesystem REQUIRED)
+find_package(Boost 1.58 COMPONENTS system filesystem program_options REQUIRED)
 
 add_executable(lurker
     src/lurker.cxx)
@@ -43,3 +43,12 @@ add_executable(xml_value
 
 target_link_libraries(xml_value
     tinyxml)
+
+add_executable(pp
+    src/pp.cxx)
+
+target_link_libraries(pp
+    ${Boost_SYSTEM_LIBRARIES}
+    ${Boost_FILESYSTEM_LIBRARIES}
+    ${Boost_PROGRAM_OPTIONS_LIBRARIES}
+)
