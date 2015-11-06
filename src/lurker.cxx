@@ -40,6 +40,7 @@ void print_matches(const char* filename, const vector<Match>& matches)
     cout << filename << endl;
     for (const Match& match : matches)
         cout << match.lineno << ":" << match.s << endl;
+    cout << endl;
 }
 
 bool has_str(const vector<string>& haystack, const string& needle)
