@@ -9,6 +9,7 @@ endif()
 
 link_directories($ENV{GTEST_HOME})
 include_directories(include)
+include_directories(/usr/include/gtest)
 
 add_executable(rand_line
     src/rand_line.cxx)
@@ -52,3 +53,6 @@ target_link_libraries(pp
     ${Boost_FILESYSTEM_LIBRARIES}
     ${Boost_PROGRAM_OPTIONS_LIBRARIES}
 )
+
+add_executable(rand_int
+    src/rand_int.cxx)
