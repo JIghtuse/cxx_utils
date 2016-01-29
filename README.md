@@ -20,3 +20,14 @@ lines:
     ./src/rand_line.cxx
     26:    random_device rd;
 
+## rand_int
+
+Generates random numbers in specified range:
+
+    $ ./rand_int 1 6 3
+    3
+    5
+    2
+    $ ./rand_int -2 2 2
+    -1
+    2
