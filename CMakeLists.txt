@@ -56,3 +56,7 @@ target_link_libraries(pp
 
 add_executable(rand_int
     src/rand_int.cxx)
+
+add_executable(cities
+    include/color.h
+    src/cities.cxx)
