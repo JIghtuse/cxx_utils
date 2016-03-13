@@ -7,19 +7,14 @@ using namespace std;
 
 vector<int> gen_guess()
 {
+    constexpr int guess_length{4};
+
     random_device rd;
     mt19937 gen(rd());
 
-    vector<int> numbers{0,1,2,3,4,5,6,7,8,9};
-    vector<int> guess;
-
-    constexpr int guess_length{4};
-    for (int i = 0; i < guess_length; ++i) {
-        uniform_int_distribution<> dist(0, numbers.size() - 1);
-        int idx = dist(gen);
-        guess.push_back(numbers[idx]);
-        numbers.erase(numbers.begin() + idx);
-    }
+    vector<int> guess{0,1,2,3,4,5,6,7,8,9};
+    shuffle(guess.begin(), guess.end(), gen);
+    guess.resize(guess_length);
 
     return guess;
 }
