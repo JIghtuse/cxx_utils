@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iostream>
+#include <limits>
 #include <random>
 #include <vector>
 
@@ -29,8 +30,14 @@ int main()
 
     while (secret != guess) {
         cin >> guess[0] >> guess[1] >> guess[2] >> guess[3];
+        if (cin.eof()) {
+            cerr << "Bye!\n";
+            return 0;
+        }
         if (!cin || !all_of(guess.begin(), guess.end(), [](int i){ return i >= 0 && i <= 9;})) {
             cerr << "Incorrect input. Enter 4 digits separated by space\n";
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
 
