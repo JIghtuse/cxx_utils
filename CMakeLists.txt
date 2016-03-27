@@ -60,3 +60,10 @@ add_executable(rand_int
 add_executable(cities
     include/color.h
     src/cities.cxx)
+
+add_executable(url_extractor
+    src/url_extractor.cxx)
+
+target_link_libraries(url_extractor
+    ${Boost_PROGRAM_OPTIONS_LIBRARIES}
+)
