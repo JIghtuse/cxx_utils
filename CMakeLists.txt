@@ -67,3 +67,10 @@ add_executable(url_extractor
 target_link_libraries(url_extractor
     ${Boost_PROGRAM_OPTIONS_LIBRARIES}
 )
+
+add_executable(ls
+    src/ls.cxx)
+
+target_link_libraries(ls
+    stdc++fs
+)
