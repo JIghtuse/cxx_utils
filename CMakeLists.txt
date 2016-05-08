@@ -74,3 +74,11 @@ add_executable(ls
 target_link_libraries(ls
     stdc++fs
 )
+
+add_executable(valid_ip_address
+    src/valid_ip_address.cxx)
+
+target_link_libraries(valid_ip_address
+    Boost::program_options
+    Boost::system
+)
