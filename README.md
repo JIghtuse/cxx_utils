@@ -31,3 +31,11 @@ Generates random numbers in specified range:
     $ ./rand_int -2 2 2
     -1
     2
+
+## valid_ip_address
+
+Tests if passed string is a valid IP address.
+
+    $ ./valid_ip_address --address ::1 # returns 0
+    $ ./valid_ip_address --address 127.0.0.1 # returns 0
+    $ ./valid_ip_address --address dog # returns 1
