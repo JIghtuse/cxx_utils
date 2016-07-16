@@ -1,3 +1,4 @@
+#include <experimental/random>
 #include <experimental/optional>
 #include <iostream>
 #include <random>
@@ -64,9 +65,14 @@ int main(int argc, char *argv[])
     if (argc == 4)
         nnumbers = parse_number_with_default<size_t>(argv[3], nnumbers);
 
+#ifdef __cpp_lib_experimental_randint
+    for (size_t i = 0; i < nnumbers; ++i)
+        cout << std::experimental::randint(*from, *to) << '\n';
+#else
     RandomInt ri{*from, *to};
     for (size_t i = 0; i < nnumbers; ++i)
-        cout << ri() << endl;
+        cout << ri() << '\n';
+#endif
 
     return 0;
 }
