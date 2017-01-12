@@ -10,8 +10,7 @@ using std::experimental::optional;
 class RandomInt {
 public:
     RandomInt(int from, int to) :
-        rd{},
-        re{rd()},
+        re{},
         dist{from, to}
     {}
     int operator()()
@@ -19,7 +18,6 @@ public:
         return dist(re);
     }
 private:
-    random_device rd;
     default_random_engine re;
     uniform_int_distribution<int> dist;
 };
