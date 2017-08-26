@@ -82,3 +82,6 @@ target_link_libraries(valid_ip_address
     Boost::program_options
     Boost::system
 )
+
+add_executable(number_statistics
+    src/number_statistics.cxx)
