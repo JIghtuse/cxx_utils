@@ -85,3 +85,11 @@ target_link_libraries(valid_ip_address
 
 add_executable(number_statistics
     src/number_statistics.cxx)
+
+add_executable(xf
+    src/xf.cxx)
+
+target_link_libraries(xf
+    stdc++fs
+    Boost::program_options
+)
